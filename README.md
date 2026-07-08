@@ -140,7 +140,7 @@ I was CEO & Co-Founder, and owned the majority of the codebase and AWS infrastru
 
 ## Screenshots
 
-*Add product screenshots, demo GIFs, and architecture diagrams here.*
+As shown in the visuals/ directory
 
 ## Retrospective
 
