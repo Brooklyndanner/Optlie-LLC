@@ -2,7 +2,7 @@
 
 **Conversational SMS/RCS automation for healthcare scheduling.**
 
-> Optlie was an early-stage startup that operated from October 2025 through July 2026. This repo is a record of what I built.
+> I Co-Founded Optlie in August of 2025. This repo is a record of what I built.
 
 ---
 
