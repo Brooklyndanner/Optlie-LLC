@@ -25,7 +25,7 @@
 
 ## Overview
 
-Optlie automated appointment rescheduling and cancellation-backfilling for outpatient clinics — physical therapy practices first — through interactive, HIPAA-compliant text messaging. It integrated directly into a clinic's existing EMR (starting with **PtEverywhere**) so that when a patient needed to reschedule, they could do it with a single text reply — no phone calls, no logins, no links. When that reschedule left a hole in the schedule, Optlie automatically worked to identify and text other patients who could fill it.
+Optlie automated appointment rescheduling and cancellation-backfilling for outpatient clinics (starting in physical therapy practices) through interactive, HIPAA-compliant text messaging. It integrated directly into a clinic's existing EMR (starting with **PtEverywhere**) so that when a patient needed to reschedule, they could do it with a single text reply — no phone calls, no logins, no links. When that reschedule left a hole in the schedule, Optlie automatically worked to identify and text other patients who could fill it.
 
 The long-term vision was to become the infrastructure layer for intelligent rescheduling: starting in physical therapy, expanding into chiropractic and mental health, and eventually into any appointment-based business bleeding revenue to cancellations.
 
@@ -33,7 +33,7 @@ The long-term vision was to become the infrastructure layer for intelligent resc
 
 Patient no-shows and cancellations cost the U.S. healthcare system an estimated **$150 billion a year**. For a small private practice, that translates to **$30,000–$90,000 in lost annual revenue** — often the difference between a clinic hiring another provider or barely staying afloat.
 
-Today, that process is almost entirely manual: a front-desk secretary tracking a waitlist on sticky notes, then playing phone tag trying to fill an opening. Nationally, only about **25% of cancelled slots ever get refilled**. The rest is permanent revenue loss. Reminder-text products (Weave, Podium, and similar tools EMRs bundle in) reduce no-shows somewhat, but none of them know a patient's actual availability, so none of them can reschedule a patient automatically — and none of them backfill the resulting gap.
+Today, that process is almost entirely manual: a front-desk secretary tracking a waitlist on sticky notes, then playing phone tag trying to fill an opening. Nationally, only about **25% of cancelled slots ever get refilled**. The rest is permanent revenue loss. Reminder-text products (Weave, Podium, and similar tools EMRs bundle in) reduce no-shows somewhat, but they're missing both sides of the rescheduling equation: they don't collect a patient's actual availability the way Optlie's check-in form did, and they weren't integrated into the EMR itself (like PtEverywhere and Raintree) to pull the clinic's real-time open slots. Without both pieces of availability data, none of them can reschedule a patient automatically or backfill the resulting gap.
 
 ## The Solution
 
@@ -72,17 +72,16 @@ A stats dashboard tracked recovery across three flows — manual, patient-initia
 | Layer | Technology |
 |---|---|
 | Backend | Node.js / TypeScript, deployed as AWS Lambda functions via the **Serverless Framework** |
-| API | API Gateway, custom domain (`api.optlie.com`), certificates provisioned via AWS ACM |
-| Primary database | PostgreSQL on **AWS RDS** (`optlie_prod`), accessed in production through a bastion host over SSH tunnel |
+| API | API Gateway, with certificates provisioned via AWS ACM |
+| Primary database | PostgreSQL on **AWS RDS**, accessed in production through a bastion host over SSH tunnel |
 | Secondary data store | **DynamoDB** (pay-per-request tables) for high-write conversational data — message history and per-conversation state (last message time/preview, message counts) |
 | Frontend | React + TypeScript (patient-facing tablet/web flow), built and synced to **S3**, served via **CloudFront** (`patient.optlie.com`, `messages.optlie.com`) |
 | Messaging / SMS | **Telnyx**, with 10DLC-registered numbers issued per clinic under each clinic's own business name and EIN |
 | Messaging / RCS (in progress) | **Twilio**, piloting carousel-style day/time pickers and an RCS WebView in-thread calendar UI as the next generation of the texting experience |
 | EMR integration | **PtEverywhere API** (live), with WebPT, Jane, and Raintree in progress — two-way sync pulling clinic calendars and writing back reschedule/cancellation events, typically within ~10 seconds of a patient's reply |
-| Secrets & config | AWS Secrets Manager (sensitive values) + environment files (non-sensitive config), a hybrid approach chosen for the small team's operational simplicity |
+| Secrets & config | AWS Secrets Manager for all sensitive credentials |
 | Networking | Custom VPC attached to RDS via subnet groups, private Secrets Manager VPC endpoint, dedicated security groups for Lambda |
 | Encryption | SSE-KMS on S3 for data at rest, KMS-encrypted Lambda environment variables, database encryption at rest |
-| Infra ownership | Deployed and managed under a single AWS account/profile; infrastructure-as-config via `serverless.yml` |
 
 ## System Architecture
 
