@@ -139,7 +139,7 @@ I was CEO & Co-Founder, and owned the majority of the codebase and AWS infrastru
 
 ## Screenshots
 
-*As shown in the visuals/ directory
+*As shown in the visuals/ directory*
 
 ## Retrospective
 
