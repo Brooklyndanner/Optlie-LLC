@@ -2,7 +2,7 @@
 
 **Conversational SMS/RCS automation for healthcare scheduling.**
 
-> Optlie was an early-stage startup (Optlie, LLC → Optlie, Inc.) that operated from October 2025 through July 2026. The company has since shut down. This repository is preserved as a portfolio record of the product, engineering work, and business built during that time — not as an actively maintained project.
+> Optlie was an early-stage startup that operated from October 2025 through July 2026. This repo is a record of what I built.
 
 ---
 
