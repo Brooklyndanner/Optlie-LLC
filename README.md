@@ -19,7 +19,6 @@
 - [My Role](#my-role)
 - [Team](#team)
 - [Screenshots](#screenshots)
-- [Retrospective](#retrospective)
 
 ---
 
@@ -142,6 +141,3 @@ I was CEO & Co-Founder, and owned the majority of the codebase and AWS infrastru
 
 *As shown in the visuals/ directory*
 
-## Retrospective
-
-Optlie shut down in July 2026. The team validated real demand — clinics consistently recognized the problem within minutes of seeing their own numbers — and built a working, HIPAA-compliant, EMR-integrated product from scratch as a two-to-three person team. This repository exists to document that work honestly: what was built, how it was built, and the technical and go-to-market ground covered along the way.
