@@ -78,7 +78,8 @@ A stats dashboard tracked recovery across three flows — manual, patient-initia
 | Frontend | React + TypeScript (patient-facing tablet/web flow), built and synced to **S3**, served via **CloudFront** (`patient.optlie.com`, `messages.optlie.com`) |
 | Messaging / SMS | **Telnyx**, with 10DLC-registered numbers issued per clinic under each clinic's own business name and EIN |
 | Messaging / RCS (in progress) | **Twilio**, piloting carousel-style day/time pickers and an RCS WebView in-thread calendar UI as the next generation of the texting experience |
-| EMR integration | **PtEverywhere API** (live), with WebPT, Jane, and Raintree in progress — two-way sync pulling clinic calendars and writing back reschedule/cancellation events, typically within ~10 seconds of a patient's reply |
+| EMR integration | **PtEverywhere and Raintree (live)**. Two-way sync pulling clinic calendars and writing back reschedule/cancellation events, typically within ~10 seconds of a patient's reply. PtEverywhere used JWT auth with token caching and early refresh to avoid race conditions, plus automatic retry on 401/403s; Raintree used OAuth 2.0 client credentials. Both integrations included webhook handlers for real-time events, with payload decryption and idempotency checks to handle out-of-order or duplicate deliveries. |
+| Reply Interpretation | Structured inputs (Y/N/R/date) with a fallback LLM layer to interpret free-form patient replies, gated by confidence thresholds so it only acted automatically when certain of intent |
 | Secrets & config | AWS Secrets Manager for all sensitive credentials |
 | Networking | Custom VPC attached to RDS via subnet groups, private Secrets Manager VPC endpoint, dedicated security groups for Lambda |
 | Encryption | SSE-KMS on S3 for data at rest, KMS-encrypted Lambda environment variables, database encryption at rest |
@@ -119,7 +120,7 @@ Because the product touched Protected Health Information (PHI), compliance was t
 - Completed **48+ in-person clinic demos** across Utah, with roughly a **69% demo-to-interest conversion rate**.
 - Signed and ran a live paid pilot clinic (Altru Integrated Health), plus additional clinics in various stages of onboarding and letters of intent.
 - Secured **two EMR partnership integrations**, expanding addressable reach to roughly **14,500+ clinics** through those platforms.
-- Fully live integration with **PtEverywhere**; WebPT, Jane, and Raintree integrations in progress.
+- Fully live integration with **PtEverywhere** and **Raintree**.
 - Business model: a tiered monthly subscription tied to a percentage of recovered revenue, targeting a share of an estimated **$1.3B addressable market** across the ~145,000 small clinics in the U.S.
 
 ## My Role
@@ -128,7 +129,7 @@ I was CEO & Co-Founder, and owned the majority of the codebase and AWS infrastru
 
 - Designing and building the backend (Node.js/TypeScript on AWS Lambda), the Postgres + DynamoDB data model, and the deployment pipeline (Serverless Framework, S3/CloudFront, VPC/bastion access to production).
 - Leading the RCS/Twilio integration work — carousel-based scheduling UI and an in-thread RCS WebView calendar.
-- Owning the PtEverywhere EMR integration and the broader HIPAA/BAA compliance posture, including data handling and encryption decisions.
+- Owning the PtEverywhere and Raintree EMR integration and the broader HIPAA/BAA compliance posture, including data handling and encryption decisions.
 - Running founder-led sales: clinic demos, lead qualification against Optlie's ideal customer profile (multi-provider, insurance-accepting practices), and the CRM/outbound motion.
 
 ## Team
