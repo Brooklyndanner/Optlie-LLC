@@ -30,7 +30,7 @@ The long-term vision was to become the infrastructure layer for intelligent resc
 
 ## The Problem
 
-Patient no-shows and cancellations cost the U.S. healthcare system an estimated **$150 billion a year**. For a small private practice, that translates to **$30,000–$90,000 in lost annual revenue** — often the difference between a clinic hiring another provider or barely staying afloat.
+Patient no-shows and cancellations cost the U.S. healthcare system an estimated **$150 billion a year**. For a small private practice, that translates to **$30,000–$90,000 in lost annual revenue**.
 
 Today, that process is almost entirely manual: a front-desk secretary tracking a waitlist on sticky notes, then playing phone tag trying to fill an opening. Nationally, only about **25% of cancelled slots ever get refilled**. The rest is permanent revenue loss. Reminder-text products (Weave, Podium, and similar tools EMRs bundle in) reduce no-shows somewhat, but they're missing both sides of the rescheduling equation: they don't collect a patient's actual availability the way Optlie's check-in form did, and they weren't integrated into the EMR itself (like PtEverywhere and Raintree) to pull the clinic's real-time open slots. Without both pieces of availability data, none of them can reschedule a patient automatically or backfill the resulting gap.
 
